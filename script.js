@@ -18,20 +18,6 @@ const panels = {
     title: "Gallery",
     kicker: "Memories",
     template: "galleryTemplate",
-    setup(root) {
-      const buttons = root.querySelectorAll(".segmented button");
-      const figures = root.querySelectorAll(".photo-grid figure");
-      buttons.forEach((button) => {
-        button.addEventListener("click", () => {
-          buttons.forEach((item) => item.classList.remove("active"));
-          button.classList.add("active");
-          const filter = button.dataset.filter;
-          figures.forEach((figure) => {
-            figure.hidden = filter !== "all" && figure.dataset.kind !== filter;
-          });
-        });
-      });
-    },
   },
   about: {
     title: "About Us",
@@ -43,12 +29,56 @@ const panels = {
     kicker: "Generations",
     template: "familyTemplate",
     setup(root) {
-      const button = root.querySelector("#addMemberButton");
-      button.addEventListener("click", () => {
-        button.textContent = "Member Added";
-        setTimeout(() => {
-          button.textContent = "Add Member";
-        }, 1400);
+      const form = root.querySelector("#familyMemberForm");
+      const board = root.querySelector("#familyBoard");
+      const note = root.querySelector("#familyNote");
+      const savedMembers = JSON.parse(localStorage.getItem("happyCelebrationFamily") || "[]");
+
+      function escapeHtml(value) {
+        return value.replace(/[&<>"']/g, (char) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;",
+        }[char]));
+      }
+
+      function renderFamilyTree(members) {
+        if (!members.length) {
+          board.innerHTML = '<p class="empty-tree">Add family members to form the tree.</p>';
+          return;
+        }
+
+        const groups = ["Grandparent", "Parent", "Child", "Family Member"].map((relation) => ({
+          relation,
+          members: members.filter((member) => member.relation === relation),
+        })).filter((group) => group.members.length);
+
+        board.innerHTML = groups.map((group) => `
+          <div class="tree-level">
+            <strong>${group.relation}</strong>
+            <div class="tree-members">
+              ${group.members.map((member) => `<span>${escapeHtml(member.name)}</span>`).join("")}
+            </div>
+          </div>
+        `).join("");
+      }
+
+      renderFamilyTree(savedMembers);
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const data = Object.fromEntries(new FormData(form));
+        const members = JSON.parse(localStorage.getItem("happyCelebrationFamily") || "[]");
+        members.push({
+          name: data.memberName.trim(),
+          relation: data.relation,
+        });
+        localStorage.setItem("happyCelebrationFamily", JSON.stringify(members));
+        renderFamilyTree(members);
+        note.textContent = `${data.memberName} added to family tree.`;
+        form.reset();
       });
     },
   },

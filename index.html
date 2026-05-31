@@ -10,23 +10,10 @@
     <main class="app-shell" aria-label="Happy Celebration application">
       <section class="phone-frame">
         <div class="screen">
-          <div class="status-bar" aria-hidden="true">
-            <span>4:02</span>
-            <span class="status-icons">
-              <span class="shield"></span>
-              <span class="shield"></span>
-            </span>
-            <span class="device-icons">
-              <span class="signal"></span>
-              <span class="wifi"></span>
-              <span class="battery"></span>
-            </span>
-          </div>
-
           <header class="hero">
             <div class="camera-dot" aria-hidden="true"></div>
             <div class="brand-mark" aria-label="Happy Celebration">
-              <div class="monogram">HC</div>
+              <img class="brand-logo" src="assets/hc-logo.png" alt="">
               <strong>HAPPY</strong>
               <span>CELEBRATION</span>
             </div>
@@ -94,7 +81,11 @@
     </main>
 
     <template id="bookTemplate">
-      <form class="lux-form" id="bookingForm">
+      <form class="lux-form book-form" id="bookingForm">
+        <label>
+          <span>Name</span>
+          <input name="name" type="text" placeholder="Your name" required>
+        </label>
         <label>
           <span>Event Type</span>
           <select name="eventType" required>
@@ -106,7 +97,7 @@
         </label>
         <label>
           <span>Date</span>
-          <input name="date" type="date" required>
+          <input name="date" type="text" placeholder="MM/DD/YYYY" pattern="(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/[0-9]{4}" required>
         </label>
         <label>
           <span>Guests</span>
@@ -122,21 +113,16 @@
     </template>
 
     <template id="galleryTemplate">
-      <div class="segmented" role="tablist" aria-label="Gallery category">
-        <button class="active" type="button" data-filter="all">All</button>
-        <button type="button" data-filter="decor">Decor</button>
-        <button type="button" data-filter="family">Family</button>
-      </div>
       <div class="photo-grid">
-        <figure data-kind="decor">
+        <figure>
           <img src="assets/event-lights.webp" alt="Elegant outdoor event lights">
           <figcaption>Evening Decor</figcaption>
         </figure>
-        <figure data-kind="decor">
+        <figure>
           <img src="assets/celebration-bg.webp" alt="Colorful celebration confetti">
           <figcaption>Celebration Mood</figcaption>
         </figure>
-        <figure data-kind="family">
+        <figure>
           <img src="assets/family-tree.png" alt="Family tree artwork">
           <figcaption>Family Moments</figcaption>
         </figure>
@@ -157,15 +143,35 @@
     </template>
 
     <template id="familyTemplate">
-      <div class="family-board">
-        <img src="assets/family-tree.png" alt="Family tree">
-        <div class="family-nodes">
-          <span>Grandparents</span>
-          <span>Parents</span>
-          <span>Children</span>
-        </div>
+      <div class="family-workspace">
+        <section class="family-section">
+          <h3>Add Member</h3>
+          <form class="lux-form compact-form" id="familyMemberForm">
+            <label>
+              <span>Name</span>
+              <input name="memberName" type="text" placeholder="Member name" required>
+            </label>
+            <label>
+              <span>Relation</span>
+              <select name="relation" required>
+                <option value="Grandparent">Grandparent</option>
+                <option value="Parent">Parent</option>
+                <option value="Child">Child</option>
+                <option value="Family Member">Family Member</option>
+              </select>
+            </label>
+            <button class="primary-action" type="submit">Add Member</button>
+            <p class="form-note" id="familyNote"></p>
+          </form>
+        </section>
+
+        <section class="family-section">
+          <h3>Show Family Tree</h3>
+          <div class="family-board" id="familyBoard">
+            <p class="empty-tree">Add family members to form the tree.</p>
+          </div>
+        </section>
       </div>
-      <button class="primary-action" type="button" id="addMemberButton">Add Member</button>
     </template>
 
     <template id="registerTemplate">
@@ -201,8 +207,8 @@
           <span class="contact-icon">&#9993;</span>
           <span><strong>Email</strong>hello@happycelebration.com</span>
         </a>
-        <a href="https://wa.me/919999999999">
-          <span class="contact-icon">&#9684;</span>
+        <a class="whatsapp-contact" href="https://wa.me/919999999999">
+          <span class="contact-icon whatsapp-icon"></span>
           <span><strong>WhatsApp</strong>Quick message</span>
         </a>
       </div>
