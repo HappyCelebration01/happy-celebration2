@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Happy Celebration</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell" aria-label="Happy Celebration application">
+      <section class="phone-frame">
+        <div class="screen">
+          <div class="status-bar" aria-hidden="true">
+            <span>4:02</span>
+            <span class="status-icons">
+              <span class="shield"></span>
+              <span class="shield"></span>
+            </span>
+            <span class="device-icons">
+              <span class="signal"></span>
+              <span class="wifi"></span>
+              <span class="battery"></span>
+            </span>
+          </div>
+
+          <header class="hero">
+            <div class="camera-dot" aria-hidden="true"></div>
+            <div class="brand-mark" aria-label="Happy Celebration">
+              <div class="monogram">HC</div>
+              <strong>HAPPY</strong>
+              <span>CELEBRATION</span>
+            </div>
+            <div class="ribbon" aria-hidden="true"></div>
+          </header>
+
+          <section class="home-view active" id="homeView" aria-label="Main menu">
+            <div class="title-row" aria-hidden="true">
+              <span></span>
+              <h1>HAPPY</h1>
+              <span></span>
+            </div>
+            <div class="sparkle" aria-hidden="true">&#10022;</div>
+
+            <div class="menu-grid">
+              <button class="menu-card" type="button" data-panel="book">
+                <span class="icon calendar" aria-hidden="true"></span>
+                <span>Book Event</span>
+                <i></i>
+              </button>
+              <button class="menu-card" type="button" data-panel="gallery">
+                <span class="icon gallery" aria-hidden="true"></span>
+                <span>Gallery</span>
+                <i></i>
+              </button>
+              <button class="menu-card" type="button" data-panel="about">
+                <span class="icon info" aria-hidden="true"></span>
+                <span>About Us</span>
+                <i></i>
+              </button>
+              <button class="menu-card" type="button" data-panel="family">
+                <span class="icon family" aria-hidden="true"></span>
+                <span>Family Tree</span>
+                <i></i>
+              </button>
+              <button class="menu-card" type="button" data-panel="register">
+                <span class="icon register" aria-hidden="true"></span>
+                <span>Register</span>
+                <i></i>
+              </button>
+              <button class="menu-card" type="button" data-panel="contact">
+                <span class="icon envelope" aria-hidden="true"></span>
+                <span>Contact Us</span>
+                <i></i>
+              </button>
+            </div>
+          </section>
+
+          <section class="panel-view" id="panelView" aria-live="polite">
+            <div class="panel-top">
+              <button class="back-button" type="button" id="backButton" aria-label="Back to menu">&lsaquo;</button>
+              <div>
+                <p id="panelKicker">Happy Celebration</p>
+                <h2 id="panelTitle">Book Event</h2>
+              </div>
+            </div>
+            <div class="panel-content" id="panelContent"></div>
+          </section>
+
+          <a class="whatsapp-fab" href="https://wa.me/919999999999" aria-label="Contact on WhatsApp">
+            <span></span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <template id="bookTemplate">
+      <form class="lux-form" id="bookingForm">
+        <label>
+          <span>Event Type</span>
+          <select name="eventType" required>
+            <option value="Birthday">Birthday</option>
+            <option value="Wedding">Wedding</option>
+            <option value="Anniversary">Anniversary</option>
+            <option value="Corporate Celebration">Corporate Celebration</option>
+          </select>
+        </label>
+        <label>
+          <span>Date</span>
+          <input name="date" type="date" required>
+        </label>
+        <label>
+          <span>Guests</span>
+          <input name="guests" type="number" min="10" max="1000" value="100" required>
+        </label>
+        <label>
+          <span>Venue</span>
+          <input name="venue" type="text" placeholder="City or venue name" required>
+        </label>
+        <button class="primary-action" type="submit">Send Booking</button>
+        <p class="form-note" id="bookingNote"></p>
+      </form>
+    </template>
+
+    <template id="galleryTemplate">
+      <div class="segmented" role="tablist" aria-label="Gallery category">
+        <button class="active" type="button" data-filter="all">All</button>
+        <button type="button" data-filter="decor">Decor</button>
+        <button type="button" data-filter="family">Family</button>
+      </div>
+      <div class="photo-grid">
+        <figure data-kind="decor">
+          <img src="assets/event-lights.webp" alt="Elegant outdoor event lights">
+          <figcaption>Evening Decor</figcaption>
+        </figure>
+        <figure data-kind="decor">
+          <img src="assets/celebration-bg.webp" alt="Colorful celebration confetti">
+          <figcaption>Celebration Mood</figcaption>
+        </figure>
+        <figure data-kind="family">
+          <img src="assets/family-tree.png" alt="Family tree artwork">
+          <figcaption>Family Moments</figcaption>
+        </figure>
+      </div>
+    </template>
+
+    <template id="aboutTemplate">
+      <article class="story-card">
+        <img src="assets/event-lights.webp" alt="Warm celebration venue">
+        <h3>Luxury moments, warmly handled.</h3>
+        <p>Happy Celebration plans family functions, birthdays, weddings, and milestone gatherings with premium decor, smooth coordination, and a personal touch.</p>
+        <div class="stats">
+          <span><strong>250+</strong>Events</span>
+          <span><strong>12</strong>Cities</span>
+          <span><strong>4.9</strong>Rating</span>
+        </div>
+      </article>
+    </template>
+
+    <template id="familyTemplate">
+      <div class="family-board">
+        <img src="assets/family-tree.png" alt="Family tree">
+        <div class="family-nodes">
+          <span>Grandparents</span>
+          <span>Parents</span>
+          <span>Children</span>
+        </div>
+      </div>
+      <button class="primary-action" type="button" id="addMemberButton">Add Member</button>
+    </template>
+
+    <template id="registerTemplate">
+      <form class="lux-form" id="registerForm">
+        <label>
+          <span>Full Name</span>
+          <input name="fullName" type="text" placeholder="Your name" required>
+        </label>
+        <label>
+          <span>Phone</span>
+          <input name="phone" type="tel" placeholder="+91 98765 43210" required>
+        </label>
+        <label>
+          <span>Role</span>
+          <select name="role" required>
+            <option value="Guest">Guest</option>
+            <option value="Family Member">Family Member</option>
+            <option value="Organizer">Organizer</option>
+          </select>
+        </label>
+        <button class="primary-action" type="submit">Register</button>
+        <p class="form-note" id="registerNote"></p>
+      </form>
+    </template>
+
+    <template id="contactTemplate">
+      <div class="contact-list">
+        <a href="tel:+919999999999">
+          <span class="contact-icon">&#9742;</span>
+          <span><strong>Call</strong>+91 99999 99999</span>
+        </a>
+        <a href="mailto:hello@happycelebration.com">
+          <span class="contact-icon">&#9993;</span>
+          <span><strong>Email</strong>hello@happycelebration.com</span>
+        </a>
+        <a href="https://wa.me/919999999999">
+          <span class="contact-icon">&#9684;</span>
+          <span><strong>WhatsApp</strong>Quick message</span>
+        </a>
+      </div>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
