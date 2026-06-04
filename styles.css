@@ -984,6 +984,124 @@ select {
   margin-top: 2px;
 }
 
+.simple-family {
+  gap: 14px;
+}
+
+.simple-family-board {
+  gap: 14px;
+  padding: 14px;
+}
+
+.simple-family-card {
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid rgba(245, 199, 110, 0.28);
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.couple-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-items: stretch;
+}
+
+.family-person,
+.inline-family-form {
+  min-height: 88px;
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(16, 0, 6, 0.58);
+  border: 1px solid rgba(245, 199, 110, 0.18);
+}
+
+.person-label,
+.inline-family-form span {
+  color: var(--gold-300);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+.family-person strong {
+  color: var(--gold-100);
+  font-size: 18px;
+  overflow-wrap: anywhere;
+}
+
+.spouse-person {
+  border-color: rgba(37, 211, 102, 0.32);
+}
+
+.inline-family-form input {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid rgba(245, 199, 110, 0.28);
+  border-radius: 10px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.24);
+  padding: 0 12px;
+  outline: none;
+}
+
+.inline-family-form .secondary-action {
+  min-height: 42px;
+}
+
+.family-step-note,
+.empty-children {
+  margin: 0;
+  color: var(--soft);
+  text-align: center;
+  font-size: 13px;
+}
+
+.children-section {
+  display: grid;
+  gap: 10px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(245, 199, 110, 0.16);
+}
+
+.children-section h4 {
+  margin: 0;
+  color: var(--gold-100);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+}
+
+.children-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.children-list span {
+  min-height: 34px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: var(--gold-100);
+  background: rgba(245, 199, 110, 0.14);
+  border: 1px solid rgba(245, 199, 110, 0.2);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+@media (max-width: 430px) {
+  .couple-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .contact-list {
   display: grid;
   overflow: hidden;
