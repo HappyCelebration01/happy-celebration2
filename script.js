@@ -638,12 +638,19 @@ function openPanel(name) {
   if (!panel) return;
 
   const template = document.querySelector(`#${panel.template}`);
+  if (!template) return;
+
   panelTitle.textContent = panel.title;
   panelKicker.textContent = panel.kicker;
   panelContent.replaceChildren(template.content.cloneNode(true));
-  panel.setup?.(panelContent);
   homeView.classList.remove("active");
   panelView.classList.add("active");
+
+  try {
+    panel.setup?.(panelContent);
+  } catch (error) {
+    console.error(`${panel.title} panel setup failed:`, error);
+  }
 }
 
 function closePanel() {
