@@ -13,17 +13,14 @@
           <header class="hero">
             <div class="camera-dot" aria-hidden="true"></div>
             <div class="brand-mark" aria-label="Happy Celebration">
-              <img class="brand-logo" src="assets/hc-logo-mark.png" alt="">
-              <strong>HAPPY</strong>
-              <span>CELEBRATION</span>
+              <img class="brand-logo" src="assets/hc-logo-mark.png" alt="Happy Celebration">
             </div>
-            <div class="ribbon" aria-hidden="true"></div>
           </header>
 
           <section class="home-view active" id="homeView" aria-label="Main menu">
             <div class="title-row" aria-hidden="true">
               <span></span>
-              <h1>HAPPY</h1>
+              <h1>HAPPY CELEBRATION</h1>
               <span></span>
             </div>
             <div class="sparkle" aria-hidden="true">&#10022;</div>
@@ -144,33 +141,86 @@
 
     <template id="familyTemplate">
       <div class="family-workspace">
-        <section class="family-section">
-          <h3>Add Member</h3>
-          <form class="lux-form compact-form" id="familyMemberForm">
-            <label>
-              <span>Name</span>
-              <input name="memberName" type="text" placeholder="Member name" required>
-            </label>
-            <label>
-              <span>Relation</span>
-              <select name="relation" required>
-                <option value="Grandparent">Grandparent</option>
-                <option value="Parent">Parent</option>
-                <option value="Child">Child</option>
-                <option value="Family Member">Family Member</option>
-              </select>
-            </label>
-            <button class="primary-action" type="submit">Add Member</button>
-            <p class="form-note" id="familyNote"></p>
-          </form>
-        </section>
+        <!-- Custom Tabs Navigation -->
+        <div class="family-tabs-nav">
+          <button type="button" class="family-tab-nav-btn active" id="editorTabBtn">Member List</button>
+          <button type="button" class="family-tab-nav-btn" id="previewTabBtn">Tree Preview</button>
+        </div>
 
-        <section class="family-section">
-          <h3>Show Family Tree</h3>
-          <div class="family-board" id="familyBoard">
-            <p class="empty-tree">Add family members to form the tree.</p>
+        <!-- Editor Tab View -->
+        <div class="family-editor-view active" id="familyEditorView">
+          <div class="editor-header">
+            <button class="primary-action" id="addMemberBtn" type="button">+ Add Family Member</button>
+            <button class="danger-action" id="clearTreeBtn" type="button">Reset Tree</button>
           </div>
-        </section>
+          <div class="members-list-list" id="membersListList">
+            <!-- Dynamically populated list of member rows -->
+          </div>
+        </div>
+
+        <!-- Preview Tab View -->
+        <div class="family-preview-view" id="familyPreviewView" style="display: none;">
+          <div class="tree-zoom-controls">
+            <button type="button" class="zoom-btn" id="zoomOutBtn" aria-label="Zoom Out">−</button>
+            <span class="zoom-label" id="zoomLabel">100%</span>
+            <button type="button" class="zoom-btn" id="zoomInBtn" aria-label="Zoom In">+</button>
+            <button type="button" class="zoom-btn" id="zoomFitBtn">Auto Fit</button>
+          </div>
+          
+          <div class="tree-canvas-wrapper circular-mode" id="treeCanvasWrapper">
+            <div id="treeCanvas" class="tree-canvas">
+              <!-- Dynamically populated interactive tree -->
+            </div>
+          </div>
+          <p class="swipe-hint">↔ Tap circles to edit/delete. Swipe/zoom to explore tree ↔</p>
+        </div>
+
+        <!-- Custom Glassmorphic Popup Modal Overlay -->
+        <div id="treeModal" class="tree-modal-overlay" style="display: none;">
+          <div class="tree-modal-content">
+            <h4 id="modalTitle">Add Member</h4>
+            <form id="modalForm" class="lux-form compact-form" onsubmit="return false;">
+              <!-- Add hidden inputs to keep track of targets -->
+              <input type="hidden" id="modalActionType" value="add">
+              <input type="hidden" id="modalTargetId" value="">
+              
+              <label>
+                <span>Name</span>
+                <input name="modalName" id="modalName" type="text" placeholder="Name" required autocomplete="off">
+              </label>
+
+              <label id="modalGenderLabel">
+                <span>Gender</span>
+                <div class="gender-selector">
+                  <label class="gender-btn male-btn active" id="modalMaleBtn">
+                    <input type="radio" name="modalGender" value="Male" checked required>
+                    <span>Male ♂</span>
+                  </label>
+                  <label class="gender-btn female-btn" id="modalFemaleBtn">
+                    <input type="radio" name="modalGender" value="Female" required>
+                    <span>Female ♀</span>
+                  </label>
+                </div>
+              </label>
+              
+              <div class="modal-relations-section" id="modalRelationsSection">
+                <span class="modal-relations-title">Add Relative</span>
+                <div class="modal-relations-buttons">
+                  <button type="button" class="secondary-action" id="modalAddSpouseBtn">+ Spouse</button>
+                  <button type="button" class="secondary-action" id="modalAddChildBtn">+ Child</button>
+                </div>
+              </div>
+              
+              <div class="modal-actions" style="display: flex; gap: 10px; margin-top: 10px;">
+                <button class="primary-action" id="modalSubmitBtn" type="submit" style="flex: 1;">Save</button>
+                <button class="secondary-action" id="modalCancelBtn" type="button" style="flex: 1; min-height: 50px;">Cancel</button>
+              </div>
+              
+              <!-- Additional Delete Action button when editing an existing member -->
+              <button class="danger-action" id="modalDeleteBtn" type="button" style="width: 100%; margin-top: 8px; display: none;">Delete Member</button>
+            </form>
+          </div>
+        </div>
       </div>
     </template>
 
